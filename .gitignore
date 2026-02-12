@@ -1,0 +1,11 @@
+# Geheime gegevens
+.env
+.env.local
+
+# Afhankelijkheden
+node_modules/
+dist/
+
+# IDE instellingen
+.vscode/
+.DS_Store

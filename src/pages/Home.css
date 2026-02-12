@@ -1,0 +1,37 @@
+/* Speciale tekst-glow voor de headline */
+.home-title-glow {
+  text-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+}
+
+/* Subtiele zweef-animatie voor de hero-sectie */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glassmorphism effecten */
+.glass-card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Mobiele optimalisatie voor touch-targets */
+@media (max-width: 768px) {
+  .hero-button {
+    width: 100%;
+    padding: 1.25rem;
+  }
+}
