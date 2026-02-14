@@ -7,7 +7,7 @@ const Contact = () => {
   const [isError, setIsError] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
-  // Initialisatie bij mount
+  // Initialization on mount
   useEffect(() => {
     emailjs.init("-FQSfH2Fr1xWVwyOC");
   }, []);
@@ -17,7 +17,7 @@ const Contact = () => {
     setIsSending(true);
     setIsError(false);
 
-    // Bepaal de context op basis van het domein
+    // Determine context based on hostname
     const isBeadsEngine = window.location.hostname.includes("beadsengine");
     const currentTag = isBeadsEngine ? "BEADSENGINE.COM" : "FRANSPETER.DEV";
     const currentThemeColor = isBeadsEngine ? "#000000" : "#0070f3";
@@ -29,27 +29,27 @@ const Contact = () => {
       message: form.current.message.value,
     };
 
-    // 1. Parameters voor de mail naar JOU (Inquiry)
+    // 1. Parameters for the inquiry mail to YOU
     const inquiryParams = {
       ...baseData,
       site_tag: currentTag,
       header_color: currentThemeColor,
     };
 
-    // Verzend de eerste mail
+    // Send first mail
     emailjs
       .send("service_emek1hj", "template_k48pots", inquiryParams)
       .then(() => {
-        // 2. Parameters voor de Auto-Reply naar de KLANT
+        // 2. Parameters for the Auto-Reply to the CLIENT
         const autoReplyParams = {
           name: baseData.name,
           email: baseData.email,
           title: baseData.title,
           header_color: currentThemeColor,
-          site_tag: currentTag, // Cruciaal voor de {{site_tag}} in je template footer!
+          site_tag: currentTag,
         };
 
-        // Verzend de tweede mail (Auto-Reply)
+        // Send second mail (Auto-Reply)
         return emailjs.send(
           "service_emek1hj",
           "template_eimoqpn",
@@ -57,7 +57,7 @@ const Contact = () => {
         );
       })
       .then(() => {
-        console.log("Systeem: Aanvraag verwerkt en bevestiging verzonden.");
+        console.log("System: Inquiry processed and confirmation sent.");
         setSubmitted(true);
         form.current.reset();
       })
@@ -72,11 +72,11 @@ const Contact = () => {
 
   return (
     <div className="relative pt-40 pb-20 px-6 min-h-screen bg-bg-main text-white overflow-hidden text-left">
-      {/* Achtergrond Decoratie */}
+      {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-125 h-125 bg-brand-blue/5 blur-[120px] rounded-full -mr-64 -mt-64 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-start">
-        {/* LINKS: Branding & Info */}
+        {/* LEFT: Branding & Info */}
         <div className="lg:sticky lg:top-40 space-y-12">
           <div>
             <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-brand-blue/10 border border-brand-blue/20">
@@ -91,13 +91,13 @@ const Contact = () => {
             </h1>
 
             <p className="text-slate-400 text-xl max-w-md font-medium leading-relaxed italic">
-              Heb je een visie voor een nieuwe app of wil je de krachtige logica
-              van de{" "}
+              Do you have a vision for a new app or want to implement the
+              powerful logic of the{" "}
               <span className="text-white border-b border-brand-blue/30">
                 BeadsEngine
               </span>{" "}
-              implementeren in jouw project? Ik help je graag met maatwerk
-              software of een passende licentie.
+              into your project? I’m here to help with custom software or
+              suitable licensing options.
             </p>
           </div>
 
@@ -123,17 +123,17 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">
-                  Locatie
+                  Location
                 </p>
                 <p className="text-sm font-bold text-slate-200 uppercase tracking-tight">
-                  Nederland, Remote
+                  Netherlands, Remote
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* RECHTS: Het Formulier */}
+        {/* RIGHT: The Form */}
         <div className="relative w-full">
           <div className="relative bg-white/3 border border-white/10 p-8 md:p-12 rounded-[2.5rem] backdrop-blur-3xl shadow-2xl">
             {submitted ? (
@@ -154,10 +154,10 @@ const Contact = () => {
                   </svg>
                 </div>
                 <h3 className="text-4xl font-black uppercase italic mb-4">
-                  Verzonden!
+                  Sent!
                 </h3>
                 <p className="text-slate-400 font-medium">
-                  Bedankt, ik neem binnen 24 uur contact met je op.
+                  Thank you! I will get back to you within 24 hours.
                 </p>
               </div>
             ) : (
@@ -167,71 +167,71 @@ const Contact = () => {
                 className="space-y-8 text-left"
               >
                 {isError && (
-                  <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl">
-                    <p className="text-red-400 text-[10px] font-black uppercase tracking-widest text-center">
-                      Gateway Error. Controleer je internetverbinding of Delta
-                      instellingen.
+                  <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl text-center">
+                    <p className="text-red-400 text-[10px] font-black uppercase tracking-widest">
+                      Gateway Error. Please check your connection or system
+                      settings.
                     </p>
                   </div>
                 )}
 
                 <div className="grid md:grid-cols-2 gap-8 text-left">
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-1 block">
-                      Naam
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 ml-1 block">
+                      Name
                     </label>
                     <input
                       required
                       type="text"
                       name="name"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-all text-white placeholder:text-slate-700"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-all text-white placeholder:text-slate-500"
                       placeholder="John Doe"
                     />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-1 block">
-                      E-mail
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 ml-1 block">
+                      Email
                     </label>
                     <input
                       required
                       type="email"
                       name="email"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-all text-white placeholder:text-slate-700"
-                      placeholder="naam@mail.nl"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-all text-white placeholder:text-slate-500"
+                      placeholder="name@mail.com"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-1 block">
-                    Onderwerp
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 ml-1 block">
+                    Subject
                   </label>
                   <input
                     required
                     type="text"
                     name="title"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-all text-white placeholder:text-slate-700"
-                    placeholder="Waar gaat het over?"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-all text-white placeholder:text-slate-500"
+                    placeholder="What is this regarding?"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-1 block">
-                    Bericht
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 ml-1 block">
+                    Message
                   </label>
                   <textarea
                     required
                     name="message"
                     rows="5"
-                    className="w-full bg-white/5 border border-white/10 rounded-3xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-all text-white resize-none placeholder:text-slate-700 shadow-inner"
-                    placeholder="Vertel me over je project..."
+                    className="w-full bg-white/5 border border-white/10 rounded-3xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-all text-white resize-none placeholder:text-slate-500 shadow-inner"
+                    placeholder="Tell me about your project..."
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSending}
-                  className="relative w-full py-6 bg-white text-bg-main hover:bg-brand-blue hover:text-white disabled:opacity-50 rounded-2xl font-black uppercase text-xs tracking-[0.3em] transition-all duration-500 shadow-2xl overflow-hidden group"
+                  className="relative w-full py-6 bg-white text-bg-main hover:bg-brand-blue hover:text-white disabled:opacity-50 rounded-2xl font-black uppercase text-xs tracking-[0.3em] transition-all duration-500 shadow-2xl overflow-hidden group cursor-pointer"
                 >
                   <span className="relative z-10 font-black">
                     {isSending ? "Processing..." : "Initiate Contact"}

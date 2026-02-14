@@ -1,82 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Projecten", path: "/projecten" },
+    { name: "Projects", path: "/projecten" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
 
+  const closeMenu = () => setIsOpen(false);
+
   return (
-    <header className="fixed w-full z-50 bg-bg-main/90 backdrop-blur-xl border-b border-white/5 font-inter">
-      <div className="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
-        {/* Logo met het nieuwe component */}
-        <Link
-          to="/"
-          className="flex items-center group relative z-50"
-          onClick={() => setIsOpen(false)}
-        >
-          <Logo className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
-        </Link>
+    <>
+      {/* 1. DE ACHTERGROND LAAG (OVERLAY) */}
+      <div
+        className={`fixed inset-0 transition-all duration-500 ease-in-out md:hidden`}
+        style={{
+          backgroundColor: "#070707",
+          zIndex: 9998,
+          opacity: isOpen ? 1 : 0,
+          visibility: isOpen ? "visible" : "hidden",
+          transform: isOpen ? "translateX(0)" : "translateX(100%)",
+        }}
+      >
+        {/* justify-center toegevoegd voor verticale centrering */}
+        <div className="flex flex-col items-center justify-center h-full p-12">
+          <span className="text-[10px] font-black text-brand-blue uppercase tracking-[0.4em] mb-8 opacity-60">
+            Navigation
+          </span>
 
-        {/* Desktop Nav - Geen support knop meer hier */}
-        <nav className="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className="hover:text-brand-blue transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Mobiele Hamburger */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative z-50 p-2 text-white"
-        >
-          <svg
-            className="w-8 h-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            {isOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            )}
-          </svg>
-        </button>
-
-        {/* Mobiele Overlay */}
-        <div
-          className={`fixed inset-0 bg-bg-main flex flex-col items-center justify-center transition-all duration-500 md:hidden ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
-        >
-          <nav className="flex flex-col items-center gap-8">
-            {navLinks.map((link) => (
+          {/* text-center toegevoegd voor strakke uitlijning */}
+          <nav className="flex flex-col gap-8 text-center">
+            {navLinks.map((link, index) => (
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={() => setIsOpen(false)}
-                className="text-4xl font-black text-white uppercase tracking-tighter hover:text-brand-blue"
+                onClick={closeMenu}
+                /* text-3xl of 4xl voor die mooie vette look */
+                className={`text-2xl font-black text-white uppercase tracking-tighter hover:text-brand-blue transition-all duration-300 ${
+                  isOpen
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${index * 75}ms` }}
               >
                 {link.name}
               </Link>
@@ -84,7 +65,50 @@ const Header = () => {
           </nav>
         </div>
       </div>
-    </header>
+
+      {/* 2. DE HEADER BALK - Bevat alleen logo en knop */}
+      <header
+        className="fixed top-0 left-0 w-full bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/5 font-inter"
+        style={{ zIndex: 9999 }} // De hoogste laag
+      >
+        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex justify-between items-center">
+          {/* Logo */}
+          <Link to="/" onClick={closeMenu} className="relative">
+            <Logo className="h-8 md:h-10 w-auto" />
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="hover:text-brand-blue transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Hamburger Knop */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden flex flex-col gap-1.5 p-2 outline-none"
+            aria-label="Menu"
+          >
+            <span
+              className={`h-0.5 w-6 bg-white transition-all duration-300 ${isOpen ? "rotate-45 translate-y-2" : ""}`}
+            ></span>
+            <span
+              className={`h-0.5 w-6 bg-white transition-all duration-300 ${isOpen ? "opacity-0" : ""}`}
+            ></span>
+            <span
+              className={`h-0.5 w-6 bg-white transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}
+            ></span>
+          </button>
+        </div>
+      </header>
+    </>
   );
 };
 

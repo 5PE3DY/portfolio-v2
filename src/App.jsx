@@ -7,7 +7,8 @@ import About from "./pages/About";
 import Projecten from "./pages/Projecten";
 import Contact from "./pages/Contact";
 import AdminDashboard from "./pages/AdminDashboard";
-import CoffeeButton from "./components/CoffeeButton"; // Importeer de nieuwe knop
+import Legal from "./pages/Legal"; // Alleen deze import toegevoegd
+import CoffeeButton from "./components/CoffeeButton";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
             <Route path="/projecten" element={<Projecten />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/legal" element={<Legal />} />{" "}
+            {/* Route voor de documenten */}
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>

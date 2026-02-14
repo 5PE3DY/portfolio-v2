@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
 const Projecten = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isLaunching, setIsLaunching] = useState(null); // Slaat ID op van project dat start
-  const navigate = useNavigate();
+  const [isLaunching, setIsLaunching] = useState(null);
 
   useEffect(() => {
-    // Luister live naar de 'projects' collectie in Firebase
+    // Listen live to the 'projects' collection in Firebase
     const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(
@@ -33,76 +31,79 @@ const Projecten = () => {
   }, []);
 
   const handleLaunch = (project) => {
-    // Als het project een link heeft (zoals BeadsEngine), open deze
-    if (project.link || project.title.toLowerCase().includes("beads")) {
+    // URL Logic: Priority to database link, otherwise fallback for Beadsengine
+    const targetUrl =
+      project.link ||
+      (project.title.toLowerCase().includes("beads")
+        ? "https://beadsengine.com"
+        : null);
+
+    if (targetUrl) {
       setIsLaunching(project.id);
+
+      // UX initialization simulation
       setTimeout(() => {
         setIsLaunching(null);
-        window.open(
-          project.link || "https://beadsengine.com/",
-          "_blank",
-          "noopener,noreferrer",
-        );
-      }, 1500);
+        window.open(targetUrl, "_blank", "noopener,noreferrer");
+      }, 1200);
     } else {
-      navigate("/");
+      alert("This project does not have a live link yet.");
     }
   };
 
   return (
-    <div className="pt-40 pb-20 px-6 min-h-screen bg-bg-main text-white text-left">
-      <div className="max-w-7xl mx-auto">
-        <header className="mb-32">
-          <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-left">
-            <span className="text-brand-blue text-[10px] font-black uppercase tracking-[0.3em]">
-              Case Studies
-            </span>
-          </div>
-          <h1 className="text-7xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.8] text-left">
-            BIG IDEAS <br />
-            <span className="text-brand-blue text-glow italic">REALIZED</span>
+    <div className="min-h-screen bg-bg-main text-white pt-32 pb-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <header className="mb-20">
+          <h1 className="text-6xl font-black uppercase italic tracking-tighter mb-4">
+            Selected <span className="text-brand-blue">Projects</span>
           </h1>
+          <p className="text-slate-400 font-medium tracking-wide uppercase text-xs">
+            Digital Experiences & Web Applications ({projects.length})
+          </p>
         </header>
 
         {loading ? (
-          <div className="text-brand-blue font-black uppercase tracking-[0.4em] animate-pulse">
-            Loading Cloud Data...
+          <div className="text-center py-20 font-black uppercase tracking-widest animate-pulse">
+            Loading Universe...
           </div>
         ) : (
-          <div className="grid gap-40">
+          <div className="space-y-32">
             {projects.map((project) => (
               <section
                 key={project.id}
-                className="grid md:grid-cols-2 gap-16 items-center group text-left"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center group"
               >
-                {/* Afbeelding van Firebase */}
-                <div className="relative overflow-hidden rounded-4xl border border-white/10 bg-white/5 aspect-video shadow-2xl">
+                {/* Image Showcase */}
+                <div className="relative aspect-video rounded-3xl overflow-hidden bg-slate-900 border border-white/5 shadow-2xl">
                   <img
-                    src={project.image || "/img/placeholder.png"}
+                    src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                    onError={(e) => (e.target.src = "/img/placeholder.png")}
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-bg-main via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-bg-main/80 to-transparent opacity-60" />
                 </div>
 
-                <div className="flex flex-col items-start text-left">
-                  <span className="px-3 py-1 bg-brand-blue text-bg-main text-[9px] font-black uppercase tracking-widest rounded mb-6">
-                    {project.tag || "Live Project"}
+                {/* Info Content */}
+                <div className="flex flex-col items-start">
+                  <span className="text-brand-blue font-black uppercase tracking-[0.3em] text-[10px] mb-4">
+                    {project.tag}
                   </span>
-                  <h2 className="text-5xl md:text-7xl font-black mb-6 uppercase italic leading-none tracking-tighter text-white">
+                  <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-6 group-hover:text-brand-blue transition-colors">
                     {project.title}
                   </h2>
-                  <p className="text-slate-400 text-xl mb-8 leading-relaxed font-medium">
+                  <p className="text-slate-400 text-lg mb-8 leading-relaxed font-medium">
                     {project.desc}
                   </p>
 
-                  <div className="flex flex-wrap gap-3 mb-12">
+                  <div className="flex flex-wrap gap-3 mb-10">
                     {project.tech?.split(",").map((t) => (
                       <span
                         key={t}
-                        className="text-xs font-bold text-brand-blue uppercase tracking-widest"
+                        className="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold text-slate-300 uppercase tracking-widest border border-white/10"
                       >
-                        #{t.trim()}
+                        {t.trim()}
                       </span>
                     ))}
                   </div>
@@ -114,7 +115,7 @@ const Projecten = () => {
                       ${
                         isLaunching === project.id
                           ? "bg-emerald-500 text-white animate-pulse"
-                          : "bg-white text-bg-main hover:bg-brand-blue hover:text-white hover:scale-105 shadow-lg"
+                          : "bg-white text-black hover:bg-brand-blue hover:text-white shadow-xl active:scale-95"
                       }
                     `}
                   >

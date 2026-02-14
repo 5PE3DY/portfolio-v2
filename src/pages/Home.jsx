@@ -28,9 +28,9 @@ const Home = () => {
 
           <div className="grid md:grid-cols-2 gap-12 items-end">
             <p className="text-slate-400 text-lg md:text-xl max-w-lg leading-relaxed font-medium">
-              Ik bouw schaalbare applicaties en slimme tools zoals de
-              <span className="text-white"> BeadsEngine</span>. Gespecialiseerd
-              in React, AI-integraties en moderne web-architectuur.
+              I build scalable applications and intelligent tools like the
+              <span className="text-white"> BeadsEngine</span>. Specialized in
+              React, AI integrations, and modern web architecture.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -38,13 +38,13 @@ const Home = () => {
                 to="/projecten"
                 className="px-8 py-4 bg-white text-black font-black rounded-xl hover:bg-brand-blue hover:scale-105 transition-all uppercase text-xs tracking-widest cursor-pointer shadow-xl"
               >
-                Bekijk mijn werk
+                View my work
               </Link>
               <Link
                 to="/contact"
                 className="px-8 py-4 bg-white/5 border border-white/10 text-white font-black rounded-xl hover:bg-white/10 transition-all uppercase text-xs tracking-widest cursor-pointer"
               >
-                Start een project
+                Start a project
               </Link>
             </div>
           </div>
@@ -59,7 +59,7 @@ const Home = () => {
                 Fullstack Tech
               </h3>
               <p className="text-slate-400 text-sm max-w-xs">
-                Focus op performance en schaalbaarheid met de nieuwste stack.
+                Focusing on performance and scalability with the latest stack.
               </p>
             </div>
             <div className="flex flex-wrap gap-6 mt-8">
@@ -118,7 +118,7 @@ const Home = () => {
         {/* --- MASTERPIECE: BEADSENGINE SHOWCASE --- */}
         <section className="mt-32">
           <div className="relative group overflow-hidden rounded-4xl border border-white/5 bg-slate-900">
-            {/* Achtergrond Image */}
+            {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <img
                 src="/img/ezel-render.png"
@@ -128,7 +128,7 @@ const Home = () => {
               <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/20 to-transparent"></div>
             </div>
 
-            {/* Content Kaart */}
+            {/* Content Card */}
             <div className="relative z-10 p-8 md:p-16 min-h-125 flex flex-col justify-end">
               <div className="max-w-2xl">
                 <div className="flex items-center gap-3 mb-6">
@@ -143,9 +143,9 @@ const Home = () => {
                 </h2>
 
                 <p className="text-slate-300 text-lg md:text-xl mb-8 leading-relaxed font-medium">
-                  Een revolutionaire tool die complexe afbeeldingen omzet in
-                  patronen voor strijkkralen. Gebouwd met een custom algoritme
-                  voor kleurmatching en pixel-perfecte nauwkeurigheid.
+                  A revolutionary tool that transforms complex images into
+                  patterns for iron-on beads. Built with a custom algorithm for
+                  color matching and pixel-perfect accuracy.
                 </p>
 
                 <div className="flex flex-wrap gap-4">
@@ -164,7 +164,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Subtiele Glow */}
+            {/* Subtle Glow */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/20 blur-[100px] rounded-full -mr-32 -mt-32 opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
           </div>
         </section>
