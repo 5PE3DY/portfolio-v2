@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import AdminDashboard from "./pages/AdminDashboard";
 import Legal from "./pages/Legal"; // Alleen deze import toegevoegd
 import CoffeeButton from "./components/CoffeeButton";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
             <Route path="/legal" element={<Legal />} />{" "}
             {/* Route voor de documenten */}
             <Route path="/admin" element={<AdminDashboard />} />
+            {/* De catch-all route voor 404 */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 

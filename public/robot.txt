@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /admin  # We willen niet dat je inlogscherm in Google komt!
+Sitemap: https://franspetervanlimburg.nl/sitemap.xml

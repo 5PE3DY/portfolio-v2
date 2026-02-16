@@ -11,7 +11,11 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import {
+  signOut,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const AdminDashboard = () => {
   const [projects, setProjects] = useState([]);
@@ -19,6 +23,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
 
   const [editingId, setEditingId] = useState(null);
@@ -31,21 +36,37 @@ const AdminDashboard = () => {
     tag: "",
   });
 
+  // Authenticatie Monitor
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setAuthLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      alert("Login failed: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchImagesFromServer = useCallback(async () => {
     try {
       const response = await fetch("/get_images.php");
-      if (!response.ok) throw new Error("Localhost fallback");
+      if (!response.ok) throw new Error("Server error");
       const data = await response.json();
       setImgList(data);
     } catch (err) {
-      console.log("Local info:", err.message);
+      console.log("Image fetch info:", err.message);
       setImgList([
         "/img/ezel-render.png",
         "/img/favicon_F.png",
@@ -115,7 +136,6 @@ const AdminDashboard = () => {
       setEditingId(null);
       fetchProjects();
     } catch (err) {
-      console.error("Error:", err);
       setStatus("❌ Error: " + err.message);
     } finally {
       setLoading(false);
@@ -142,21 +162,63 @@ const AdminDashboard = () => {
         fetchProjects();
         setStatus("🗑️ Deleted.");
       } catch (err) {
-        console.error("Error:", err);
+        console.error("Delete error:", err);
       }
     }
   };
 
-  if (!user)
+  // 1. Toon loading spinner terwijl we checken of je ingelogd bent
+  if (authLoading) {
     return (
-      <div className="p-10 text-center text-white font-bold uppercase tracking-widest">
-        Loading...
+      <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
+        <div className="text-white font-black uppercase tracking-[0.3em] animate-pulse">
+          Checking Session...
+        </div>
       </div>
     );
+  }
 
+  // 2. Toon login formulier als je niet ingelogd bent
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-6">
+        <form
+          onSubmit={handleLogin}
+          className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md border border-slate-200"
+        >
+          <h1 className="text-2xl font-black uppercase italic mb-6 text-slate-900 tracking-tighter">
+            Admin <span className="text-blue-600">Secure Login</span>
+          </h1>
+          <div className="space-y-4">
+            <input
+              name="email"
+              type="email"
+              placeholder="Email address"
+              className="w-full p-3 border border-slate-200 rounded-lg outline-none focus:border-blue-600 font-bold text-slate-900"
+              required
+            />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              className="w-full p-3 border border-slate-200 rounded-lg outline-none focus:border-blue-600 font-bold text-slate-900"
+              required
+            />
+            <button
+              disabled={loading}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg font-black uppercase tracking-widest hover:bg-blue-700 transition-all disabled:opacity-50"
+            >
+              {loading ? "Verifying..." : "Enter Dashboard"}
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  // 3. Toon het Dashboard als je ingelogd bent
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-xl rounded-2xl mt-28 mb-10 text-slate-900 border border-slate-200">
-      {/* HEADER */}
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-xl rounded-2xl mt-28 mb-10 text-slate-900 border border-slate-200 font-inter">
       <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
         <h1 className="text-2xl font-black uppercase italic tracking-tighter">
           Admin <span className="text-blue-600">Panel</span>
@@ -185,7 +247,6 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {/* FORM */}
       <form
         onSubmit={handleSubmit}
         className="space-y-5 bg-slate-50 p-6 rounded-xl border border-slate-200"
@@ -224,7 +285,7 @@ const AdminDashboard = () => {
 
           <div className="flex flex-col md:col-span-2">
             <label className="text-[10px] font-black uppercase tracking-wider text-blue-600 mb-1">
-              Image
+              Image Selection
             </label>
             <select
               className="border border-blue-200 bg-white p-2.5 rounded-lg text-sm font-bold focus:border-blue-600 outline-none"
@@ -289,7 +350,6 @@ const AdminDashboard = () => {
         </button>
       </form>
 
-      {/* PORTFOLIO LIST */}
       <div className="mt-10 space-y-4">
         <h2 className="text-xl font-black uppercase italic text-slate-900 tracking-tighter">
           📂 Portfolio ({projects.length})
