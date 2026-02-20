@@ -45,3 +45,15 @@
     overflow-x: hidden;
   }
 }
+@layer utilities {
+  /* Verberg scrollbar voor Chrome, Safari en Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Verberg scrollbar voor IE, Edge en Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
