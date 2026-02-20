@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
 import Pricing from "./components/Pricing";
+import NovaContact from "./components/NovaContact";
 
 const SaasApp = () => {
   useEffect(() => {
@@ -42,6 +43,7 @@ const SaasApp = () => {
         <div className="bg-[#FFFDF5]">
           <Features />
           <Pricing />
+          <NovaContact />
         </div>
       </main>
 

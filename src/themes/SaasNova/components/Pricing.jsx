@@ -38,7 +38,7 @@ const Pricing = () => {
   return (
     <section className="py-24 px-6 bg-[#FFFDF5]">
       <div className="max-w-7xl mx-auto text-center mb-16">
-        <span className="text-[#F59E0B] font-black uppercase tracking-[0.3em] text-[10px] bg-[#F59E0B]/10 px-4 py-2 rounded-full">
+        <span className="text-[#f59e0b] font-black uppercase tracking-[0.3em] text-[10px] bg-[#F59E0B]/10 px-4 py-2 rounded-full">
           Tarieven
         </span>
         <h2 className="text-4xl md:text-6xl font-black text-[#1E1B4B] mt-6 tracking-tighter uppercase italic">

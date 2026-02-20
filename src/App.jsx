@@ -15,6 +15,8 @@ import NotFound from "./pages/NotFound";
 
 // Showcase Thema
 import SaasApp from "./themes/SaasNova/SaasApp";
+import BloomApp from "./themes/StudioBloom/BloomApp";
+import BakeryApp from "./themes/Bakery/BakeryApp";
 
 // Dit is de hoofdcomponent. Vite wil graag dat dit de 'Default Export' is.
 function App() {
@@ -95,7 +97,12 @@ function App() {
             />
 
             {/* DE SHOWCASE: Volledig geisoleerd zonder jouw Header/Footer */}
+            {/* Showcase 1: SaaS Nova (Technisch/Blue) */}
             <Route path="/showcase/saas-nova" element={<SaasApp />} />
+            {/* Thema 2: Studio Bloom (Nieuw!) */}
+            <Route path="/showcase/creative-studio" element={<BloomApp />} />
+            {/* Showcase 3: Crust & Crumb (Ambachtelijk/Warm) */}
+            <Route path="/showcase/bakery" element={<BakeryApp />} />
 
             {/* 404 Route */}
             <Route

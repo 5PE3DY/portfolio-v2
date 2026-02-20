@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Layers, Monitor, Smartphone } from "lucide-react";
+import { Monitor, Paintbrush, Utensils, Layers } from "lucide-react";
 
 const Home = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -30,16 +30,19 @@ const Home = () => {
       desc: "Minimalistisch design voor creatievelingen die hun werk groots willen presenteren.",
       path: "/showcase/creative-studio",
       icon: <Monitor size={20} className="text-purple-400" />,
-      image: null, // Placeholder voor later
+      // Deze afbeelding sluit perfect aan bij de beige/minimalistische stijl
+      image:
+        "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2070",
     },
     {
-      id: "business-hub",
-      title: "Focus Consult",
-      tag: "Corporate Demo",
-      desc: "Strakke, betrouwbare uitstraling voor zakelijke dienstverlening.",
-      path: "/showcase/focus-consult",
-      icon: <Smartphone size={20} className="text-emerald-400" />,
-      image: null,
+      id: "bakery-showcase",
+      title: "Crust & Crumb",
+      tag: "Lifestyle & Retail",
+      desc: "Een warme, ambachtelijke ervaring voor een moderne bakkerij met organische vormen.",
+      path: "/showcase/bakery",
+      icon: <Utensils size={20} className="text-amber-600" />,
+      image:
+        "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2070",
     },
   ];
 
