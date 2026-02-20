@@ -3,64 +3,117 @@ import React from "react";
 const products = [
   {
     id: 1,
-    name: "Desembrood",
-    price: "€4,50",
-    img: "https://images.unsplash.com/photo-1585478259715-876a6a81fc08?q=80&w=800",
+    name: "Summer Blossom",
+    cat: "Wedding",
+    price: "€85",
+    // Prachtige gestapelde witte taart met aardbeien en rozen
+    img: "/img/bakery/Wedding_cake.jpg",
   },
   {
     id: 2,
-    name: "Franse Croissant",
-    price: "€2,20",
-    img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800",
+    name: "Berry Glaze Muse",
+    cat: "Patisserie",
+    price: "€65",
+    // De roze mirror glaze taart met bosvruchten en bloemen
+    img: "/img/bakery/Cake_fruit.jpg",
   },
   {
     id: 3,
-    name: "Kaneelbroodje",
-    price: "€3,50",
-    img: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?q=80&w=800",
+    name: "Golden Confetti",
+    cat: "Celebration",
+    price: "€75",
+    // De feestelijke taart met sterren en kleurrijke lagen
+    img: "/img/bakery/Botanical_bloom.jpg",
   },
 ];
 
 const ProductGrid = () => {
   return (
-    <section className="bg-[#FAF7F2] py-24 px-8 md:px-20">
+    <section className="bg-white py-32 px-8 md:px-20">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-16">
-          <div>
-            <span className="text-[#C19A6B] font-bold uppercase tracking-widest text-[10px] mb-2 block">
-              Vers uit de oven
-            </span>
-            <h2 className="text-4xl font-serif text-[#4A3728]">
-              Ons Assortiment
-            </h2>
-          </div>
-          <button className="text-[#4A3728] font-bold text-xs uppercase tracking-widest border-b-2 border-[#C19A6B] pb-1 hover:text-[#C19A6B] transition-all">
-            Bekijk alles
-          </button>
+        {/* Header voor de sectie om de 'Gallery' look af te maken */}
+        <div className="mb-20 text-center">
+          <span className="text-[#A68966] text-[10px] font-black uppercase tracking-[0.5em] mb-4 block">
+            Limited Edition
+          </span>
+          <h2 className="text-4xl md:text-5xl font-serif text-[#322C28] italic uppercase tracking-tighter">
+            Onze Collectie
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {products.map((product) => (
-            <div key={product.id} className="group cursor-pointer">
-              <div className="relative aspect-4/5 overflow-hidden rounded-2xl mb-6 bg-white shadow-lg">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          {products.map((product, index) => (
+            <div
+              key={product.id}
+              className={`group flex flex-col ${index === 1 ? "md:mt-24" : ""}`}
+            >
+              <div className="relative overflow-hidden mb-8 aspect-3/4 bg-[#F9F6F2] shadow-sm group-hover:shadow-2xl transition-all duration-700">
                 <img
                   src={product.img}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[2.5s] ease-out"
                 />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black text-[#4A3728]">
-                  {product.price}
+
+                {/* Overlay met prijs die omhoog komt bij hover */}
+                <div className="absolute inset-0 bg-[#322C28]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                <div className="absolute bottom-0 left-0 w-full p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-white/95 backdrop-blur-sm text-center">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-[#A68966]">
+                    Bestel nu — {product.price}
+                  </p>
                 </div>
               </div>
-              <h3 className="text-xl font-serif text-[#4A3728] mb-1">
+
+              <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#A68966] mb-2">
+                {product.cat}
+              </span>
+              <h3 className="text-2xl font-serif text-[#322C28] group-hover:italic transition-all uppercase tracking-tighter">
                 {product.name}
               </h3>
-              <p className="text-[#8B5E3C] text-xs uppercase tracking-widest font-bold">
-                Ambachtelijk bereid
-              </p>
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+};
+const BakeryContact = () => {
+  return (
+    <section id="contact" className="py-32 bg-white px-8 md:px-20 text-center">
+      <div className="max-w-3xl mx-auto">
+        <span className="text-[#A68966] text-[10px] font-black uppercase tracking-[0.4em] mb-6 block">
+          Ready for a tasting?
+        </span>
+        <h2 className="text-4xl md:text-6xl font-serif text-[#322C28] mb-12 uppercase tracking-tighter">
+          Laten we samen iets <br />{" "}
+          <span className="italic text-[#A68966] font-light">bijzonders</span>{" "}
+          maken.
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left border-t border-[#F9F6F2] pt-12">
+          <div>
+            <h4 className="font-serif text-xl mb-4 italic">Bezoek ons</h4>
+            <p className="text-sm text-[#6B5B4E] leading-loose font-light">
+              Bakkerstraat 12
+              <br />
+              1011 AB Amsterdam
+              <br />
+              Nederland
+            </p>
+          </div>
+          <div>
+            <h4 className="font-serif text-xl mb-4 italic">Contact</h4>
+            <p className="text-sm text-[#6B5B4E] leading-loose font-light">
+              hello@crustncrumb.nl
+              <br />
+              +31 (0) 20 123 4567
+            </p>
+          </div>
+        </div>
+
+        <button className="mt-16 px-16 py-5 bg-[#322C28] text-white rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-[#A68966] transition-all duration-700 shadow-2xl">
+          Boek een Tasting
+        </button>
       </div>
     </section>
   );

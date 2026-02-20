@@ -1,6 +1,12 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Monitor, Paintbrush, Utensils, Layers } from "lucide-react";
+import {
+  Monitor,
+  Paintbrush,
+  Utensils,
+  Layers,
+  ArrowRight,
+} from "lucide-react";
 
 const Home = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,7 +27,7 @@ const Home = () => {
       desc: "Een bliksemsnelle landing page met focus op conversie en moderne animaties.",
       path: "/showcase/saas-nova",
       icon: <Layers size={20} className="text-brand-blue" />,
-      image: "/img/farm-tractor-beads.png", // Jouw BeadsEngine resultaat
+      image: "/img/farm-tractor-beads.png",
     },
     {
       id: "creative-studio",
@@ -30,7 +36,6 @@ const Home = () => {
       desc: "Minimalistisch design voor creatievelingen die hun werk groots willen presenteren.",
       path: "/showcase/creative-studio",
       icon: <Monitor size={20} className="text-purple-400" />,
-      // Deze afbeelding sluit perfect aan bij de beige/minimalistische stijl
       image:
         "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2070",
     },
@@ -40,7 +45,7 @@ const Home = () => {
       tag: "Lifestyle & Retail",
       desc: "Een warme, ambachtelijke ervaring voor een moderne bakkerij met organische vormen.",
       path: "/showcase/bakery",
-      icon: <Utensils size={20} className="text-amber-600" />,
+      icon: <Utensils size={20} className="text-[#f59e0b]" />,
       image:
         "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2070",
     },
@@ -72,7 +77,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative pt-40 pb-20 px-6 bg-bg-main overflow-hidden font-sans">
+    <div className="relative pt-40 pb-20 px-6 bg-bg-main overflow-hidden font-sans text-white">
       <div className="max-w-7xl mx-auto">
         {/* --- HERO SECTION --- */}
         <section className="mb-32 relative z-10 text-left">
@@ -174,7 +179,7 @@ const Home = () => {
           </Link>
         </section>
 
-        {/* --- HORIZONTAL SHOWCASE SLIDER MET PREVIEW --- */}
+        {/* --- SHOWCASE SLIDER --- */}
         <section className="mt-32 relative z-10">
           <div className="flex justify-between items-end mb-12">
             <div>
@@ -202,31 +207,18 @@ const Home = () => {
                 key={item.id}
                 className="min-w-[85vw] md:min-w-120 snap-start bg-white/5 border border-white/10 rounded-[2.5rem] p-6 md:p-8 flex flex-col hover:border-brand-blue/40 transition-all group overflow-hidden"
               >
-                {/* De Visuele "Browser" Preview */}
-                <div className="relative aspect-video mb-8 rounded-2xl overflow-hidden border border-white/5 bg-slate-950 group-hover:border-brand-blue/20 transition-colors">
-                  <div className="absolute top-0 w-full bg-white/5 px-3 py-1.5 flex gap-1 border-b border-white/5 z-10">
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-500/30"></div>
-                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500/30"></div>
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-500/30"></div>
-                  </div>
-                  {item.image ? (
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-white/10 italic text-xs font-black uppercase tracking-widest">
-                      Coming Soon
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                <div className="relative aspect-video mb-8 rounded-2xl overflow-hidden border border-white/5 bg-slate-950">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                  />
                 </div>
 
                 <div className="flex flex-col flex-1 justify-between">
                   <div>
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center border border-white/5 text-brand-blue">
+                      <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-brand-blue border border-white/5">
                         {item.icon}
                       </div>
                       <span className="text-brand-blue text-[10px] font-black uppercase tracking-[0.2em]">
@@ -243,7 +235,7 @@ const Home = () => {
 
                   <Link
                     to={item.path}
-                    className="flex items-center justify-between w-full bg-white text-black px-6 py-5 rounded-xl font-black transition-all text-[10px] uppercase tracking-widest hover:bg-brand-blue group-hover:shadow-[0_0_30px_rgba(56,189,248,0.2)]"
+                    className="flex items-center justify-between w-full bg-white text-black px-6 py-5 rounded-xl font-black transition-all text-[10px] uppercase tracking-widest hover:bg-brand-blue"
                   >
                     Bekijk Live Demo <ArrowRight size={16} />
                   </Link>
@@ -252,57 +244,18 @@ const Home = () => {
             ))}
           </div>
 
+          {/* INDICATOR DOTS - Dit lost de unused variable errors op */}
           <div className="flex justify-center gap-3 mt-4">
             {showcases.map((_, i) => (
               <button
                 key={i}
                 onClick={() => scrollToProject(i)}
-                className={`h-1.5 transition-all duration-300 rounded-full cursor-pointer hover:bg-brand-blue/50 ${activeIndex === i ? "w-8 bg-brand-blue" : "w-2 bg-white/20"}`}
+                className={`h-1.5 transition-all duration-300 rounded-full cursor-pointer hover:bg-brand-blue/50 ${
+                  activeIndex === i ? "w-8 bg-brand-blue" : "w-2 bg-white/20"
+                }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
-          </div>
-        </section>
-
-        {/* --- MASTERPIECE SECTIE --- */}
-        <section className="mt-40 pb-20">
-          <div className="relative group overflow-hidden rounded-[3rem] border border-white/5 bg-slate-900 shadow-2xl">
-            <div className="absolute inset-0 z-0">
-              <img
-                src="/img/ezel-render.png"
-                alt="BeadsEngine Preview"
-                className="w-full h-full object-cover opacity-30 group-hover:opacity-60 group-hover:scale-105 transition-all duration-1000"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/40 to-transparent"></div>
-            </div>
-
-            <div className="relative z-10 p-8 md:p-20 min-h-140 flex flex-col justify-end">
-              <div className="max-w-2xl">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-12 h-0.5 bg-brand-blue"></span>
-                  <span className="text-brand-blue text-[10px] font-black uppercase tracking-[0.3em]">
-                    Featured Project
-                  </span>
-                </div>
-                <h2 className="text-6xl md:text-8xl font-black text-white mb-6 tracking-tighter uppercase italic text-glow leading-none">
-                  Beads<span className="text-brand-blue">Engine</span>
-                </h2>
-                <p className="text-slate-300 text-lg md:text-xl mb-10 leading-relaxed font-medium">
-                  A revolutionary tool that transforms complex images into
-                  patterns for iron-on beads. Built with a custom algorithm for
-                  color matching and pixel-perfect accuracy.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    to="/showcase/saas-nova"
-                    className="px-10 py-5 bg-brand-blue text-black font-black rounded-xl hover:bg-white hover:scale-105 transition-all uppercase text-xs tracking-[0.3em] shadow-[0_0_40px_rgba(56,189,248,0.4)]"
-                  >
-                    Launch Project
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/10 blur-[120px] rounded-full -mr-48 -mt-48 opacity-50"></div>
           </div>
         </section>
       </div>
