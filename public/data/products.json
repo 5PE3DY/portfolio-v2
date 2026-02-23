@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Studio Chair v1",
+    "price": 299,
+    "category": "Curated",
+    "image": "/img/shop/chair.jpg",
+    "designer": "Arne Jacobsen Style",
+    "material": "Gepolijst Polymeer & Staal",
+    "dimensions": "H 82cm x B 45cm x D 50cm",
+    "story": "De essentie van vorm. Een vloeiend silhouet dat de zwaartekracht lijkt te tarten, ontworpen voor de verstilde ruimte."
+  },
+  {
+    "id": 2,
+    "name": "Minimal Ceramic Vase",
+    "price": 45,
+    "category": "Object",
+    "image": "/img/shop/vase.jpg",
+    "designer": "Studio VORMR",
+    "material": "Ongeglazuurd Keramiek",
+    "dimensions": "H 30cm x Ø 18cm",
+    "story": "Rauwe textuur ontmoet geometrische perfectie. Een tactiel object dat uitnodigt tot aanraking en contemplatie."
+  },
+  {
+    "id": 3,
+    "name": "Abstract No.1 Print",
+    "price": 85,
+    "category": "Fine Art",
+    "image": "/img/shop/print.png",
+    "designer": "Visual Lab",
+    "material": "Giclée op Archival Papier",
+    "dimensions": "50cm x 70cm",
+    "story": "Een visuele weergave van stilte. De lijnen zijn met uiterste precisie geplaatst om balans in de ruimte te brengen."
+  },
+  {
+    "id": 4,
+    "name": "Linear Coffee Table",
+    "price": 849,
+    "category": "Furniture",
+    "image": "/img/shop/salontafel.jpg",
+    "designer": "Studio VORMR",
+    "material": "Massief Eiken & Staal",
+    "dimensions": "L 120cm x B 60cm x H 35cm",
+    "story": "Het anker van de zithoek. Met zijn strakke lijnen en eerlijke materialen brengt deze tafel rust en structuur in een dynamisch interieur."
+  },
+  {
+    "id": 5,
+    "name": "Nadir Lounge Chair",
+    "price": 1299,
+    "category": "Furniture",
+    "image": "/img/shop/loungechair.jpg",
+    "designer": "Niels van der Rohe",
+    "material": "Aniline Leder & Chroom",
+    "dimensions": "H 75cm x B 85cm x D 80cm",
+    "story": "Ultiem comfort verpakt in een architectonisch frame. Het contrast tussen het zachte leder en het koude chroom is de kern van moderne luxe."
+  },
+  {
+    "id": 6,
+    "name": "Atmosphere Ensemble",
+    "price": 4500,
+    "category": "Interior",
+    "image": "/img/shop/LivingRoom.jpg",
+    "designer": "VORMR Curated",
+    "material": "Diverse Texturen",
+    "dimensions": "Custom Setup",
+    "story": "Een complete compositie. De lamp werpt een zacht strijklicht over de bankstel, waardoor vormen en texturen samensmelten tot één geheel."
+  }
+]

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   Monitor,
-  Paintbrush,
+  ShoppingBag,
   Utensils,
   Layers,
   ArrowRight,
@@ -36,8 +36,7 @@ const Home = () => {
       desc: "Minimalistisch design voor creatievelingen die hun werk groots willen presenteren.",
       path: "/showcase/creative-studio",
       icon: <Monitor size={20} className="text-purple-400" />,
-      image:
-        "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2070",
+      image: "/img/Creative_studio/Wall_light.jpg",
     },
     {
       id: "bakery-showcase",
@@ -46,8 +45,16 @@ const Home = () => {
       desc: "Een warme, ambachtelijke ervaring voor een moderne bakkerij met organische vormen.",
       path: "/showcase/bakery",
       icon: <Utensils size={20} className="text-[#f59e0b]" />,
-      image:
-        "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2070",
+      image: "/img/bakery/Cake_fruit.jpg",
+    },
+    {
+      id: "concept-store",
+      title: "Concept Store", // Iets korter voor de layout
+      tag: "E-Commerce / Logic",
+      desc: "High-end webshop met focus op state management, winkelwagen-logica en API-architectuur.",
+      path: "/showcase/concept-store", // We maken dit /showcase/ voor consistentie
+      icon: <ShoppingBag size={20} className="text-emerald-500" />,
+      image: "/img/shop/chair.jpg", // Vergeet niet de nieuwe naam van de afbeelding!
     },
   ];
 
