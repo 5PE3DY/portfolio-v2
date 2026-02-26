@@ -18,6 +18,8 @@ import SaasApp from "./themes/SaasNova/SaasApp";
 import BloomApp from "./themes/StudioBloom/BloomApp";
 import BakeryApp from "./themes/Bakery/BakeryApp";
 import ConceptStoreApp from "./themes/ConceptStore/ConceptStoreApp";
+import SpecialistApp from "./themes/TheSpecialist/SpecialistApp";
+import GustoApp from "./themes/GustoApp/GustoApp";
 
 // Dit is de hoofdcomponent. Vite wil graag dat dit de 'Default Export' is.
 function App() {
@@ -98,17 +100,26 @@ function App() {
             />
 
             {/* DE SHOWCASE: Volledig geisoleerd zonder jouw Header/Footer */}
-            {/* Showcase 1: SaaS Nova (Technisch/Blue) */}
+            {/* 1: SaaS Nova */}
             <Route path="/showcase/saas-nova" element={<SaasApp />} />
-            {/* Showcase 2: Studio Bloom (Foto studio) */}
+
+            {/* 2: Studio Bloom */}
             <Route path="/showcase/creative-studio" element={<BloomApp />} />
-            {/* Showcase 3: Crust & Crumb (Ambachtelijk/Warm) */}
+
+            {/* 3: The Bakery */}
             <Route path="/showcase/bakery" element={<BakeryApp />} />
-            {/* Showcase 4: ConceptStore */}
+
+            {/* 4: Concept Store */}
             <Route
               path="/showcase/concept-store"
               element={<ConceptStoreApp />}
             />
+
+            {/* 5: The Specialist (Schilder/ZZP) */}
+            <Route path="/showcase/specialist" element={<SpecialistApp />} />
+
+            {/* 6: Gusto & Co (Catering) */}
+            <Route path="/showcase/catering" element={<GustoApp />} />
 
             {/* 404 Route */}
             <Route

@@ -8,6 +8,8 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Hammer,
+  Pizza,
 } from "lucide-react";
 
 const Home = () => {
@@ -23,6 +25,16 @@ const Home = () => {
   ];
 
   const showcases = [
+    {
+      id: "concept-store",
+      title: "VORMR.",
+      tag: "E-Commerce / Logic",
+      desc: "High-end webshop met focus op state management, winkelwagen-logica en API-architectuur.",
+      path: "/showcase/concept-store",
+      icon: <ShoppingBag size={20} className="text-emerald-500" />,
+      image: "/img/shop/chair.jpg",
+      featured: true, // Deze pakt de 4-koloms breedte
+    },
     {
       id: "saas-nova",
       title: "SaaS Nova",
@@ -51,13 +63,22 @@ const Home = () => {
       image: "/img/bakery/Cake_fruit.jpg",
     },
     {
-      id: "concept-store",
-      title: "VORMR.",
-      tag: "E-Commerce / Logic",
-      desc: "High-end webshop met focus op state management, winkelwagen-logica en API-architectuur.",
-      path: "/showcase/concept-store",
-      icon: <ShoppingBag size={20} className="text-emerald-500" />,
-      image: "/img/shop/chair.jpg",
+      id: "the-specialist",
+      title: "The Specialist",
+      tag: "Vakmanschap / ZZP",
+      desc: "Conversie-gerichte website voor schilders en bouwbedrijven met focus op directe aanvragen.",
+      path: "/showcase/specialist",
+      icon: <Hammer size={20} className="text-blue-600" />,
+      image: "/img/TheSpecialist/painter-preview.jpg",
+    },
+    {
+      id: "gusto-catering",
+      title: "Gusto & Co",
+      tag: "Horeca / Events",
+      desc: "Elegante sfeer en culinaire beleving. Inclusief menu-modules en event-reserveringen.",
+      path: "/showcase/catering",
+      icon: <Pizza size={20} className="text-red-500" />,
+      image: "/img/Catering/catering-preview.jpg", // Zorg dat deze in je public folder staat
     },
   ];
 
@@ -146,7 +167,7 @@ const Home = () => {
         </section>
 
         {/* --- TECH STACK BENTO GRID --- */}
-        <section className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 relative z-10 mb-32">
+        <section className="grid grid-cols-1 md:grid-cols-6 md:grid-rows-2 gap-4 relative z-10 mb-32">
           <div className="md:col-span-2 md:row-span-2 p-8 rounded-3xl bg-white/5 border border-white/10 flex flex-col justify-between group hover:border-brand-blue/50 transition-colors">
             <div>
               <h3 className="text-white text-2xl font-black mb-2 uppercase italic tracking-tight">
